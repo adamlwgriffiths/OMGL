@@ -182,7 +182,8 @@ Or use the entire array as a single data type
     uvs = VertexBuffer(uv_data)
 
 
-Texture Buffer's allow buffer like access to texture data.
+Texture Buffer's allow like access to 1 dimensional buffer data.
+This is great for passing large amounts of random-access data to shaders.
 
 ::
 
