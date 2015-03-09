@@ -31,12 +31,12 @@ glfw.MakeContextCurrent(window)
 
 from OpenGL import GL
 import numpy as np
-from omgl.buffer.buffer import VertexBuffer
-from omgl.shader.shader import FragmentShader, VertexShader
-from omgl.shader.program import Program
-from omgl.mesh.sub_mesh import SubMesh
-from omgl.pipeline.pipeline import Pipeline
-from omgl.texture.texture import Texture2D
+from omgl.buffer import VertexBuffer
+from omgl.shader import FragmentShader, VertexShader
+from omgl.shader import Program
+from omgl.mesh import Mesh
+from omgl.pipeline import Pipeline
+from omgl.texture import Texture2D
 import pyrr
 from pyrr import Matrix44
 
@@ -78,7 +78,7 @@ sp = Program([vs, fs])
 
 
 pl = Pipeline(sp)
-sm = SubMesh(pl, **vb.pointers)
+mesh = Mesh(pl, **vb.pointers)
 
 
 
@@ -115,7 +115,7 @@ while not glfw.WindowShouldClose(window):
     rotation = Matrix44.from_y_rotation(math.pi * delta, np.float32)
     model_view = rotation * model_view
 
-    sm.render(in_projection=projection, in_model_view=model_view)
+    mesh.render(in_projection=projection, in_model_view=model_view)
 
     glfw.SwapBuffers(window)
     glfw.PollEvents()

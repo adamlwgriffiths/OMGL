@@ -401,15 +401,12 @@ This lets you decouple the shader from the renderable object itself.
         va.render(GL.GL_TRIANGLES)
 
 
-Meshes / SubMeshes
+Meshes
 ------------------
 
-Submeshes greatly simplify the boilerplate required to render an object
+Meshes greatly simplify the boilerplate required to render an object
 by wrapping a lot of the above functionality.
-Submeshes handle vertex arrays, shaders and pipelines for you.
-
-A mesh is simply a group of submeshes. Allowing you to have a single renderable object
-composed of multiple submeshes and materials.
+Meshes handle vertex arrays, shaders and pipelines for you.
 
 
 ::
@@ -418,7 +415,7 @@ composed of multiple submeshes and materials.
     from omgl.shader import FragmentShader, VertexShader, Program
     from omgl.buffer import VertexBuffer
     from omgl.pipeline.pipeline import Pipeline
-    from omgl.mesh import SubMesh
+    from omgl.mesh import Mesh
 
     # shader program
     program = Program([
@@ -445,35 +442,35 @@ composed of multiple submeshes and materials.
     # create a pipeline with our shader and our texture
     pipeline = Pipeline(program, in_diffuse_texture=texture)
 
-    # create a submesh using our pipeline and vertex data
-    submesh = SubMesh(pipeline, **vb.pointers)
+    # create a mesh using our pipeline and vertex data
+    mesh = Mesh(pipeline, **vb.pointers)
 
     # render the mesh automatically
     # we can pass in any frame-to-frame here as named arguments
-    submesh.render(in_projection=np.eye(4), in_model_view=np.eye(4))
+    mesh.render(in_projection=np.eye(4), in_model_view=np.eye(4))
 
 
-By default, submeshes render all vertex data and use GL_TRIANGLES as the primitive
+By default, meshes render all vertex data and use GL_TRIANGLES as the primitive
 type.
 
-This can be changed at submesh construction time.
+This can be changed at mesh construction time.
 
 ::
 
     from omgl.buffer import IndexBuffer
     indices = IndexBuffer(np.array([1,2,3,4,5,6], dtype=np.uint32))
-    submesh = submesh(pipeline, indices=indices, primitive=GL.GL_TRIANGLE_STRIP)
+    mesh = Mesh(pipeline, indices=indices, primitive=GL.GL_TRIANGLE_STRIP)
 
 
-If vertex buffer's contain mixed primitive types, then use multiple submeshes
+If vertex buffer's contain mixed primitive types, then use multiple meshes
 with different pointers into the data.
 To control which elements are rendered, use either an IndexBuffer, or render from
-the submesh's VertexArray directly.
+the mesh's VertexArray directly.
 
 ::
 
-    submesh.vertex_array.render(GL.GL_TRIANGLE_STRIP, start=5, count=10)
-    submesh.vertex_array.render(GL.GL_TRIANGLES, start=20, count=6)
+    mesh.vertex_array.render(GL.GL_TRIANGLE_STRIP, start=5, count=10)
+    mesh.vertex_array.render(GL.GL_TRIANGLES, start=20, count=6)
 
 
 Authors
