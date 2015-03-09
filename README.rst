@@ -8,26 +8,26 @@ OMGL is the Graphical core of the `Bast 3D engine <https://github.com/adamlwgrif
 
 Inspired by the following projects:
 
- * `PyGLy <https://github.com/adamlwgriffiths/PyGLy>`_
- * `PyGL <https://github.com/Ademan/pygl>`_
- * `Glitter <https://github.com/swenger/glitter>`_
+* `PyGLy <https://github.com/adamlwgriffiths/PyGLy>`_
+* `PyGL <https://github.com/Ademan/pygl>`_
+* `Glitter <https://github.com/swenger/glitter>`_
 
 
 Features
 ========
 
- * Pythonic - Don't worry about OpenGL's horrible state machine.
- * NumPy at the Core - Easily pass complex data structures to OpenGL.
- * BYOWS - Bring your own windowing system (`CyGLFW3 recommended <https://github.com/adamlwgriffiths/cyglfw3>`_).
+* Pythonic - Don't worry about OpenGL's horrible state machine.
+* NumPy at the Core - Easily pass complex data structures to OpenGL.
+* BYOWS - Bring your own windowing system (`CyGLFW3 recommended <https://github.com/adamlwgriffiths/cyglfw3>`_).
 
 
 
 Dependencies
 ============
 
- * PyOpenGL
- * PyOpenGL-accelerate
- * Numpy (1.8 as 1.9 has a `critical bug <https://github.com/numpy/numpy/issues/5224>`_)
+* PyOpenGL
+* PyOpenGL-accelerate
+* Numpy (1.8 as 1.9 has a `critical bug <https://github.com/numpy/numpy/issues/5224>`_)
 
 
 
@@ -463,4 +463,4 @@ the submesh's VertexArray directly.
 Authors
 =======
 
- * `Adam Griffiths <https://github.com/adamlwgriffiths>`_
+* `Adam Griffiths <https://github.com/adamlwgriffiths>`_
