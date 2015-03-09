@@ -51,3 +51,7 @@ class SubMesh(DescriptorMixin):
     def pipeline(self, pipeline):
         self._pipeline = pipeline
         self._bind_pointers()
+
+    @property
+    def vertex_array(self):
+        return self._vertex_array
