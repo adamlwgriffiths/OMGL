@@ -150,8 +150,8 @@ min_filter and mag_filter properties.
     )
 
 
-MipMap's are automatically generated, and can be re-generated with the 'mipmap' function
-Auto-generating mipmaps can be disabled by over-riding the mipmap argument.
+MipMap's are automatically generated, and can be re-generated with the 'mipmap' function.
+Automatic generation of mipmaps can be disabled by over-riding the mipmap argument.
 
 ::
 
