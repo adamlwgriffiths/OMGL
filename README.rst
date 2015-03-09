@@ -125,6 +125,7 @@ about the layout of your buffers.
 To avoid the complexities of creating the array, you can convert to a complex array after creation.
 
 ::
+
     from omgl.buffer import VertexBuffer
     flat_data = np.array([
         [ 1., 0.,-1., 1., 0.],
@@ -162,6 +163,7 @@ You can manually provide this information should you not with to use complex dty
 Or use the entire array as a single data type
 
 ::
+
     from omgl.buffer import VertexBuffer, BufferPointer
     vertex_data = np.array([
         [ 1., 0.,-1.],
