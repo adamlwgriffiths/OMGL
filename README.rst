@@ -82,7 +82,7 @@ This is easily done with the dtypes module.
 Textures
 --------
 
-Textures can be created using raw data
+Textures can be created using raw data.
 
 ::
 
@@ -104,6 +104,107 @@ Or loaded from a file using PIL / Pillow
     from omgl.texture import Texture2D
     texture = Texture2D.open('assets/texture/formats/RGBA.png')
 
+
+Textures also provide information about themselves.
+
+::
+
+
+    from omgl.texture import Texture2D
+    texture = Texture2D.open('assets/texture/formats/RGBA.png')
+
+    print(texture.internal_format)
+    print(texture.size)
+    print(texture.dtype)
+    print(texture.shape)
+
+
+Textures can also be created empty using a shape and dtype.
+Passed formats and Internal formats are auto-detected, but can be over-ridden
+with the internal_format and format arguments.
+
+::
+
+    from OpenGL import GL
+    from omgl.texture import Texture2D
+    # create an empty 256x256 texture with 4 channels, RGBA.
+    texture = Texture2D(shape=(256,256,4), dtype=np.uint8)
+    texture.set_data(data=np.random.random((256,256,4)))
+
+    texture = Texture2D(shape=(256,256,4), dtype=np.uint8, internal_format=GL.GL_RGBA)
+
+
+
+Textures will automatically have their min and mag filters set to GL_LINEAR
+to avoid 'black textures' in OpenGL 3.
+This can be avoided by passing the desired filter mode to the constructor as the
+min_filter and mag_filter properties.
+
+::
+
+    from OpenGL import GL
+    from omgl.texture import Texture2D
+    texture = Texture2D.open('assets/texture/formats/RGBA.png',
+        min_filter=GL.GL_NEAREST,
+        mag_filter=GL.GL_NEAREST,
+    )
+
+
+MipMap's are autometically generated, and can be re-generated with the 'mipmap' function
+Auto-generating mipmaps can be disabled by over-riding the mipmap argument.
+
+::
+
+    from omgl.texture import Texture2D
+    texture = Texture2D(shape=(256,256,4), dtype=np.uint8, mipmap=False)
+    texture.set_data(data=np.random.random((256,256,4)))
+    texture.mipmap()
+    texture.set_data(data=np.random.random((256,256,4)))
+    texture.mipmap()
+
+
+
+Because of the need for texture minification and magnification, textures consist
+of a number of 'levels'. This also means that getting and setting data must specify
+the requested level.
+By default this is 0.
+
+::
+
+    from omgl.texture import Texture2D
+    texture = Texture2D.open('assets/texture/formats/RGBA.png')
+    # get base level texture data
+    print(texture.get_data())
+    # get first mipmap level data
+    print(texture.get_data(1))
+
+
+Various texture parameters can be set at creation via named arguments, or later.
+
+::
+
+    from omgl.texture import Texture2D
+    texture = Texture2D.open('assets/texture/formats/RGBA.png', wrap_s=GL.GL_REPEAT)
+    texture.wrap_t = GL.GL_CLAMP_TO_EDGE
+
+
+The active texture unit can be set from the Texture class (or derived classes)
+or texture objects themselves.
+Note that this property accesses the global active unit property, and isn't
+setting that object's texture unit.
+
+::
+
+    from omgl.texture import Texture, Texture2D
+    texture = Texture2D.open('assets/texture/formats/RGBA.png')
+
+    # the following calls are all equivalent
+    texture.active_unit = 1
+    Texture.active_unit = 1
+    Texture2D.active_unit = 1
+
+    # we can get the current active unit.
+    print(Texture.active_unit)
 
 
 Buffers
