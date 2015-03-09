@@ -151,15 +151,16 @@ min_filter and mag_filter properties.
 
 
 MipMap's are automatically generated, and can be re-generated with the 'mipmap' function.
-Automatic generation of mipmaps can be disabled by over-riding the mipmap argument.
+Automatic generation of mipmaps can be disabled by over-riding the mipmap argument
+in the constructor and set_data functions.
 
 ::
 
     from omgl.texture import Texture2D
     texture = Texture2D(shape=(256,256,4), dtype=np.uint8, mipmap=False)
-    texture.set_data(data=np.random.random((256,256,4)))
+    texture.set_data(data=np.random.random((256,256,4)), mipmap=False)
     texture.mipmap()
-    texture.set_data(data=np.random.random((256,256,4)))
+    texture.set_data(data=np.random.random((256,256,4)), mipmap=False)
     texture.mipmap()
 
 
@@ -172,11 +173,19 @@ By default this is 0.
 ::
 
     from omgl.texture import Texture2D
-    texture = Texture2D.open('assets/texture/formats/RGBA.png')
+    texture = Texture2D(shape=(256,256,4), dtype=np.uint8, mipmap=False)
+    texture.set_data(np.random.random((256,256,4)))
+    texture.mipmap()
+
     # get base level texture data
     print(texture.get_data())
+
     # get first mipmap level data
     print(texture.get_data(1))
+
+    # a convenience property is provided for level 0
+    texture.data = np.random.random((256,256,4))
+    print(texture.data)
 
 
 Various texture parameters can be set at creation via named arguments, or later.
