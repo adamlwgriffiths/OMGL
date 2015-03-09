@@ -82,7 +82,9 @@ This is easily done with the dtypes module.
 Textures
 --------
 
-Np data::
+Textures can be created using raw data
+
+::
 
     from omgl.texture import Texture2D
     data = np.random.random((32,32,4))
@@ -95,7 +97,9 @@ Np data::
     texture.bind()
 
 
-File loading (PIL / Pillow)::
+Or loaded from a file using PIL / Pillow
+
+::
 
     from omgl.texture import Texture2D
     texture = Texture2D.open('assets/texture/formats/RGBA.png')
