@@ -1,0 +1,7 @@
+# due to bugs in 1.9, we MUST use 1.8
+# https://github.com/numpy/numpy/issues/5224
+numpy==1.8.2
+pyrr
+cyglfw3
+PyOpenGL
+PyOpenGL-accelerate
