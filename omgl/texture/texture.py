@@ -395,6 +395,7 @@ class BasicTexture(Texture):
         with self:
             self._sub_set(*args)
 
+
     def mipmap(self):
         with self:
             GL.glGenerateMipmap(self._target)
@@ -414,6 +415,14 @@ class BasicTexture(Texture):
     @property
     def shape(self):
         return self._shape
+
+    @property
+    def data(self):
+        return self.get_data(0)
+
+    @data.setter
+    def data(self, value):
+        self.set_data(value)
 
 
 class Texture1D_Mixin(object):
