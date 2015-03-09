@@ -6,6 +6,12 @@ An easy to use Pythonic 3D OpenGL framework.
 
 OMGL is the Graphical core of the `Bast 3D engine <https://github.com/adamlwgriffiths/bast>`_.
 
+Inspired by the following projects:
+
+ * `PyGLy <https://github.com/adamlwgriffiths/PyGLy>`_
+ * `PyGL <https://github.com/Ademan/pygl>`_
+ * `Glitter <https://github.com/swenger/glitter>`_
+
 
 Features
 ========
