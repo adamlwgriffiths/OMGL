@@ -182,6 +182,19 @@ Or use the entire array as a single data type
     uvs = VertexBuffer(uv_data)
 
 
+Texture Buffer's allow buffer like access to texture data.
+
+::
+
+    from omgl.buffer import TextureBuffer
+    data = np.ones((32,32,4), dtype=np.float32)
+    texture_buffer = TextureBuffer(data)
+    texture = texture_buffer.texture
+
+    texture.active_unit = 0
+    texture.bind()
+
+
 
 Shaders
 -------
