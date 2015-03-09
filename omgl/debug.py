@@ -14,7 +14,7 @@ class FunctionPrinter(object):
     def __getattr__(self, name):
         return getattr(self._original, name)
 
-def funcion_printer(fn):
+def function_printer(fn):
     func = FunctionPrinter(fn)
     for name in dir(fn):
         attr = getattr(fn, name)
@@ -36,7 +36,7 @@ def print_gl_calls(enable=True):
             if hasattr(func, '_orig'):
                 continue
 
-            func = funcion_printer(func)
+            func = function_printer(func)
         else:
             if hasattr(func, '_orig'):
                 continue
