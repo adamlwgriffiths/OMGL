@@ -61,28 +61,28 @@ fss = """
 data, indices = pyrr.geometry.create_cube((5.,5.,5.,), st=True, dtype=np.float32)
 flat_data = data[indices]
 
-from omgl.buffer.buffer import VertexBuffer
+from omgl.buffer import VertexBuffer
 
 shaped_data = flat_data.view(dtype=[('in_position', np.float32, 3,),('in_uv', np.float32, 2,),])
 vb = VertexBuffer(shaped_data)
 
 
-from omgl.shader.shader import FragmentShader, VertexShader
-from omgl.shader.program import Program
+from omgl.shader import FragmentShader, VertexShader
+from omgl.shader import Program
 
 fs = FragmentShader(fss)
 vs = VertexShader(vss)
 sp = Program([vs, fs])
 
 
-from omgl.mesh.sub_mesh import SubMesh
-from omgl.pipeline.pipeline import Pipeline
+from omgl.mesh import Mesh
+from omgl.pipeline import Pipeline
 
 from pyrr import Matrix44
 
 
 pl = Pipeline(sp)
-sm = SubMesh(pl, **vb.pointers)
+mesh = Mesh(pl, **vb.pointers)
 
 
 from omgl.buffer.buffer import TextureBuffer
@@ -118,7 +118,7 @@ while not glfw.WindowShouldClose(window):
     rotation = Matrix44.from_y_rotation(math.pi * delta, np.float32)
     model_view = rotation * model_view
 
-    sm.render(in_projection=projection, in_model_view=model_view)
+    mesh.render(in_projection=projection, in_model_view=model_view)
 
     glfw.SwapBuffers(window)
     glfw.PollEvents()
