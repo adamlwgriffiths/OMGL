@@ -250,7 +250,7 @@ To avoid the complexities of creating the array, you can convert to a complex ar
     vb = VertexBuffer(data)
 
 
-You can manually provide this information should you not with to use complex dtypes.
+You can manually provide this information should you not want to use complex dtypes.
 
 ::
 
@@ -446,9 +446,11 @@ Pipelines
 ---------
 
 Pipelines provide a way to automatically link textures, values (uniforms) and
-vertex data (attributes) to a shader before rendering.
+vertex data (attributes) to a shader program before rendering.
 
-This lets you decouple the shader from the renderable object itself.
+The Pipeline allows you to assign values to the shader program without worrying about it being bound or not at the time.
+
+This lets you decouple the shader program from the renderable object itself.
 
 
 ::
