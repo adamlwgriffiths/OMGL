@@ -25,10 +25,27 @@ Features
 Dependencies
 ============
 
+* Numpy (1.8.2 as 1.9 has a `critical bug <https://github.com/numpy/numpy/issues/5224>`_)
 * PyOpenGL
-* PyOpenGL-accelerate
-* Numpy (1.8 as 1.9 has a `critical bug <https://github.com/numpy/numpy/issues/5224>`_)
+* Pillow
 
+
+Optional dependencies dependencies
+==================================
+
+* PyOpenGL-accelerate - Speed boost for PyOpenGL
+    * `pip install -r requirements-accelerate.txt`
+    * or `pip install omgl[accelerate]`
+* CyGLFW3 - Windowing system used in examples (or other windowing system)
+    * `pip install -r requirements-cyglfw3.txt`
+    * or `pip install omgl[cyglfw3]`
+* Pyrr - 3D Mathematics library used in examples
+    * `pip install -r requirements-pyrr.txt`
+    * or `pip install omgl[pyrr]`
+
+To install all dependencies:
+
+* `pip install omgl[accelerate,cyglfw3,pyrr]`
 
 
 Examples
