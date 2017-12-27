@@ -214,7 +214,7 @@ while not glfw.WindowShouldClose(window):
 
     GL.glDrawArrays(GL.GL_TRIANGLES, 0, len(data))
 
-    model_view = pyrr.Matrix44.from_y_rotation(np.pi * delta) * model_view
+    model_view = model_view * pyrr.Matrix44.from_y_rotation(np.pi * delta)
     set_uniform_matrix('in_model_view', np.array(model_view, dtype=np.float32))
 
     glfw.SwapBuffers(window)

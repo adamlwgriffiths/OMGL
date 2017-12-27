@@ -87,6 +87,7 @@ mesh = Mesh(pl, **vb.pointers)
 
 from omgl.buffer.buffer import TextureBuffer
 td = np.ones((32,32,4), dtype=np.float32)
+td[:] *= 0.5
 tb = TextureBuffer(td)
 #bt = BufferTexture(tb)
 bt = tb.texture
@@ -116,7 +117,7 @@ while not glfw.WindowShouldClose(window):
     GL.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT)
 
     rotation = Matrix44.from_y_rotation(math.pi * delta, np.float32)
-    model_view = rotation * model_view
+    model_view = model_view * rotation
 
     mesh.render(in_projection=projection, in_model_view=model_view)
 
