@@ -27,9 +27,10 @@ setup(
     author='Adam Griffiths',
     url='https://github.com/adamlwgriffiths/omgl',
     install_requires=[
-        # due to bugs in 1.9, we MUST use 1.8
+        # due to bugs in 1.9, we MUST use <1.9 (1.8) or some version after the issue is fixed
+	# it is unclear which version fixed it, lets just be safe and say 1.13.X (which is latest minor version)
         # https://github.com/numpy/numpy/issues/5224
-        'numpy==1.8.2',
+        'numpy>=1.13.0',
         'pyopengl',
         'pillow',
     ],

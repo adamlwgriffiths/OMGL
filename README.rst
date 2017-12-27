@@ -25,7 +25,7 @@ Features
 Dependencies
 ============
 
-* Numpy (1.8.2 as 1.9 has a `critical bug <https://github.com/numpy/numpy/issues/5224>`_)
+* Numpy (A recent version as 1.9 has a `critical bug <https://github.com/numpy/numpy/issues/5224>`_)
 * PyOpenGL
 * Pillow
 
