@@ -20,7 +20,7 @@ glfw.WindowHint(glfw.CONTEXT_VERSION_MAJOR, major)
 glfw.WindowHint(glfw.CONTEXT_VERSION_MINOR, minor)
 glfw.WindowHint(glfw.CONTEXT_ROBUSTNESS, glfw.NO_ROBUSTNESS)
 glfw.WindowHint(glfw.OPENGL_FORWARD_COMPAT, 1)
-glfw.WindowHint(glfw.OPENGL_DEBUG_CONTEXT, 1)
+#glfw.WindowHint(glfw.OPENGL_DEBUG_CONTEXT, 1)
 glfw.WindowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
 
 window_size = (640, 480)
@@ -39,14 +39,16 @@ def redirector(fn):
         return fn(*args, **kwargs)
     return func
 
-for name in dir(GL):
-    # ignore normal module values
-    if not name.startswith('gl'):
-        continue
+# set to True to print every GL call
+if False:
+    for name in dir(GL):
+        # ignore normal module values
+        if not name.startswith('gl'):
+            continue
 
-    func = getattr(GL, name)
-    func = redirector(func)
-    setattr(GL, name, func)
+        func = getattr(GL, name)
+        func = redirector(func)
+        setattr(GL, name, func)
 
 
 
@@ -77,7 +79,7 @@ void main(void) {
     //out_color = vec4(gl_FragCoord.xyz / vec3(640., 480., 1.), 1.0);
     //out_color = vec4(ex_uv.x, ex_uv.y, 1.0, 1.0);
     //out_color = texture(in_diffuse_texture, ex_uv);
-    out_color = texelFetch(in_buffer_texture, 0);
+    out_color = texelFetch(in_buffer_texture, int(ex_uv.x * 512.0) + int(ex_uv.y * 512.0) * 512);
 }
 """
 
@@ -176,11 +178,9 @@ set_uniform_i('in_diffuse_texture', 0)
 # Buffer Texture
 #
 
-
-#data = np.empty((512,512,4), dtype=np.uint8)
-#data[:] = 128
-data = np.empty((512,512,4), dtype=np.float32)
-data[:] = 1.0
+dtype = np.float32
+data = np.random.random_sample((512,512,4))
+data = data.astype(np.float32)
 
 buff_tex = GL.glGenBuffers(1)
 GL.glBindBuffer(GL.GL_TEXTURE_BUFFER, buff_tex)

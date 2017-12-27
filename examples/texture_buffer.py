@@ -54,7 +54,8 @@ fss = """
     in vec2 ex_uv;
     out vec4 out_color;
     void main(void) {
-        out_color = texelFetch(in_buffer, 0);
+        // we need to calculate the texel offset, the texture is 32x32
+        out_color = texelFetch(in_buffer, int(ex_uv.x * 32.0) + int(ex_uv.y * 32.0) * 32);
     }
     """
 
@@ -86,9 +87,12 @@ mesh = Mesh(pl, **vb.pointers)
 
 
 from omgl.buffer.buffer import TextureBuffer
-td = np.ones((32,32,4), dtype=np.float32)
-td[:] *= 0.5
-tb = TextureBuffer(td)
+
+dtype = np.float32
+data = np.random.random_sample((512,512,4))
+data = data.astype(np.float32)
+
+tb = TextureBuffer(data)
 #bt = BufferTexture(tb)
 bt = tb.texture
 
